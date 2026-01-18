@@ -1,0 +1,293 @@
+:root {
+  --bg-color: #0f0f12;
+  --text-main: #ffffff;
+  --text-secondary: #94a3b8;
+  --accent-cyan: #06b6d4;
+  --accent-purple: #8b5cf6;
+  --success: #10b981;
+  --glass-bg: rgba(30, 41, 59, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.03);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.08), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+  background-attachment: fixed;
+}
+
+/* Typography */
+h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.05rem;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Components */
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 10px 40px -10px rgba(6, 182, 212, 0.15);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--accent-purple);
+  margin-bottom: 1rem;
+}
+
+.copy-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+}
+
+.section {
+  margin: 6rem 0;
+}
+
+
+/* 3D & Animations */
+.perspective-container {
+  perspective: 1000px;
+}
+
+.floating-shape {
+  position: fixed;
+  z-index: -1;
+  opacity: 0.4;
+  pointer-events: none;
+  animation: float-3d 8s ease-in-out infinite;
+}
+
+.shape-1 {
+  top: 10%;
+  left: -5%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle at 30% 30%, rgba(6, 182, 212, 0.4), transparent 70%);
+  filter: blur(40px);
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  bottom: 20%;
+  right: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 70% 70%, rgba(139, 92, 246, 0.4), transparent 70%);
+  filter: blur(50px);
+  animation-delay: -4s;
+}
+
+@keyframes float-3d {
+
+  0%,
+  100% {
+    transform: translateY(0) translateZ(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-40px) translateZ(50px) rotate(5deg);
+  }
+}
+
+/* Glass Card 3D Enhancements */
+.card-content {
+  transform-style: preserve-3d;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-glare {
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 40%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover .card-glare {
+  opacity: 1;
+}
+
+
+/* 3D Download Button */
+.btn-3d {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: var(--accent-cyan);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-3d::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  transform: translateZ(-6px) translateY(6px);
+  transition: transform 0.15s ease-out;
+}
+
+.btn-3d:hover {
+  transform: translateY(-2px);
+}
+
+.btn-3d:hover::before {
+  transform: translateZ(-6px) translateY(8px);
+}
+
+.btn-3d:active {
+  transform: translateY(4px);
+}
+
+.btn-3d:active::before {
+  transform: translateZ(-6px) translateY(2px);
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translateZ(10px);
+}
+
+/* Search Bar */
+.search-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 10;
+}
+
+.search-input {
+  flex: 1;
+  background: rgba(25, 25, 30, 0.8);
+  border: 1px solid var(--glass-border);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.1rem;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
